@@ -60,12 +60,12 @@ app.get("/tables", function(req, res) {
   res.sendFile(path.join(__dirname, "tables.html"));
 });
 
-
-// Returns 
 app.get("/api/tables", function(req, res) {
-  var chosen = req.params.characters;
-
   return res.json(tables);
+});
+
+app.get("/api/waitlist", function(req, res) {
+  return res.json(reservations);
 });
 
 // Create reservations (takes in JSON input) 
@@ -78,7 +78,7 @@ app.post("/api/tables", function(req, res) {
   console.log(newReservation);
 
   // Sees if there are tables available 
-  if (tables.length <= 6){
+  if (tables.length < 5){
 
     //puts new reservation in the tables array 
     tables.push(newReservation);
